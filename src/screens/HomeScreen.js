@@ -76,6 +76,7 @@ const HomeScreen = () => {
   return (
     <>
        <StatusBar backgroundColor='#9395d3'/>
+       {refreshing?(<Loader visible={refreshing}/>) :(
     <View style={styles.container}> 
       <View style={{flexDirection:'row',justifyContent:'flex-end',height:70}}>
         <SortOptions selectedOption={sortBy} onSelect={handleSortBy}/>
@@ -89,14 +90,12 @@ const HomeScreen = () => {
         onRefresh={fetchData}
       />):
       (
-         refreshing?(<Loader visible={refreshing}/>) :(
       <View style={{flex:1, alignItems: 'center', marginTop: 300 }}>
         <Text style={{fontSize:30}}>No Tasks for Today</Text>
-      </View>)
+      </View>
       )
       }
       <View style={styles.addContainer}>
-  
       
       <TouchableOpacity 
         style={styles.addButton}
@@ -105,7 +104,7 @@ const HomeScreen = () => {
         <Ionicons name="add" size={30} color="white" />
       </TouchableOpacity>
       </View>
-    </View>
+    </View>)}
     </>
   )
 }

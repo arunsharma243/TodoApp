@@ -35,6 +35,11 @@ const TodoCard = ({task,onDelete,fetchData}) => {
         <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-around' }}>
           <Text style={[styles.title,{ textDecorationLine:currentStatus==="COMPLETED"?"line-through":"none"}]}>{task.title}</Text>
           <View style={{ flex: 1,flexDirection:'row',justifyContent:'flex-end' }}>
+            
+             <Text style={styles.reminderText}>
+             {task.reminderTime
+             ? task.reminderTime.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }):('Pick Time')}
+              </Text>
 
             <TouchableOpacity onPress={confirmDelete}>
             <EvilIcons name="trash" color="#9395d3" size={28} style={styles.icon}/>
@@ -75,5 +80,9 @@ const styles = StyleSheet.create({
       },
       icon:{
         marginHorizontal:7
-      }
+      },
+      reminderText: {
+        fontSize: 16,
+        color: '#9395d3',
+      },
     });

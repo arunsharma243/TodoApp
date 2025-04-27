@@ -3,19 +3,15 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-// import Loader from '../components/Loader'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const LoginScreen = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
-    const [visible,setVisible]=useState(false)
-
     const navigation=useNavigation()
 
     const loginUser=()=>{
-      setVisible(true)
       if (!email || !password) {
         Alert.alert('Missing Fields', 'Please enter both email and password.');
         return;
@@ -23,7 +19,6 @@ const LoginScreen = () => {
       auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        setVisible(false)
         const { uid } = userCredential.user;
   
         // Fetch user data from Firestore
@@ -37,11 +32,10 @@ const LoginScreen = () => {
           const userData = documentSnapshot.data();
           console.log('Logged-in user data:', userData);
           goToNext(userData.uid,userData.name)
-          // navigation.navigate('Home',  {userData} );
         }
       })
       .catch((error) => {
-        setVisible(false)
+        // setVisible(false)
         console.error('Login error:', error);
         if (error.code === 'auth/invalid-email') {
           Alert.alert('Invalid Email', 'Please enter a valid email address.');
@@ -57,7 +51,6 @@ const LoginScreen = () => {
     }
     const goToNext=async(userId,name)=>{
       await AsyncStorage.setItem('NAME',name)
-      // await AsyncStorage.setItem('EMAIL',email)
       await AsyncStorage.setItem('USERID',userId)
       navigation.navigate('Home')
       
@@ -91,13 +84,12 @@ const LoginScreen = () => {
       >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.login}
+      <Text style={styles.signup}
             onPress={()=>{
              navigation.navigate('SignUp')
             }}
             >
         Or Sign Up</Text>
-        {/* <Loader visible={visible}/> */}
     </View>
   )
 }
@@ -140,7 +132,7 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:20
     },
-    login:{
+    signup:{
         alignSelf:'center',
         marginTop:50,
         fontSize:20,

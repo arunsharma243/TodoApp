@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import {StatusBar, StyleSheet,Text,View} from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-import LoginScreen from './src/screens/LoginScreen';
-import Splash from './src/screens/Splash';
 import notifee from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native'
 function App(){

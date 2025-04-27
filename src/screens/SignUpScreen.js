@@ -3,11 +3,9 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
-import uuid from 'react-native-uuid'
 const SignUpScreen = () => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
-    const [mobile,setMobile]=useState('')
     const [password,setPassword]=useState('')
     const [confirmPassword,setConfirmPassword]=useState('')
 
@@ -17,7 +15,6 @@ const SignUpScreen = () => {
     .createUserWithEmailAndPassword(email, password)
     .then(userCredential=>{
       const {uid}=userCredential.user
-
       return firestore()
       .collection('users')
       .doc(uid)
@@ -54,7 +51,6 @@ const SignUpScreen = () => {
       setConfirmPassword('')
     }
     const validate=()=>{
-      // let isValid=true
       if (!name || !email || !password || !confirmPassword) {
         Alert.alert('Error','All fields are required.');
         return false;
@@ -80,13 +76,6 @@ const SignUpScreen = () => {
        onChangeText={setEmail}
        style={styles.input}
       />
-      {/* <TextInput
-       placeholder="Enter Mobile"
-       value={mobile}
-       onChangeText={setMobile}
-       keyboardType={'number-pad'}
-       style={styles.input}
-      /> */}
       <TextInput
        placeholder="Enter Password"
        value={password}

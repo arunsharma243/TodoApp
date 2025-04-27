@@ -32,15 +32,6 @@ const AppNavigator = () => {
             ]
           );
         };
-        
-    // useEffect(()=>{
-    //   fetchuid()
-    // })
-    // const fetchuid=async()=>{
-    //   const uid=await AsyncStorage.getItem("USERID")
-    //   console.log("render agin",uid)
-    // }
-    // console.log("render agin",uid)
   return (
         <Stack.Navigator>
             <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>

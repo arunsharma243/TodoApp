@@ -33,19 +33,16 @@ export default SortOptions;
 
 const styles = StyleSheet.create({
   container: {
-    // flex:1,
     height:100,
     padding: 10,
     backgroundColor: '#fff',
     borderRadius: 20,
     elevation: 5,
     margin: 10,
-    // marginBottom:0
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    // marginBottom: 20,
     alignSelf: 'center',
     color:'black'
   },
